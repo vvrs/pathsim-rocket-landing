@@ -1,0 +1,569 @@
+{
+ "version": "1.0.0",
+ "metadata": {
+  "created": "2026-11-22T20:53:39.000Z",
+  "modified": "2026-11-22T20:53:39.000Z",
+  "name": "Rocket landing: point mass + convex MPC"
+ },
+ "graph": {
+  "nodes": [
+   {
+    "id": "b9a528e0-bb5e-4d86-bd5f-e7d66047d1d3",
+    "type": "Wrapper",
+    "name": "MPC",
+    "position": {
+     "x": 300,
+     "y": 260
+    },
+    "inputs": [
+     {
+      "id": "b9a528e0-bb5e-4d86-bd5f-e7d66047d1d3-input-0",
+      "nodeId": "b9a528e0-bb5e-4d86-bd5f-e7d66047d1d3",
+      "name": "x",
+      "direction": "input",
+      "index": 0,
+      "color": "#969696"
+     },
+     {
+      "id": "b9a528e0-bb5e-4d86-bd5f-e7d66047d1d3-input-1",
+      "nodeId": "b9a528e0-bb5e-4d86-bd5f-e7d66047d1d3",
+      "name": "z",
+      "direction": "input",
+      "index": 1,
+      "color": "#969696"
+     },
+     {
+      "id": "b9a528e0-bb5e-4d86-bd5f-e7d66047d1d3-input-2",
+      "nodeId": "b9a528e0-bb5e-4d86-bd5f-e7d66047d1d3",
+      "name": "vx",
+      "direction": "input",
+      "index": 2,
+      "color": "#969696"
+     },
+     {
+      "id": "b9a528e0-bb5e-4d86-bd5f-e7d66047d1d3-input-3",
+      "nodeId": "b9a528e0-bb5e-4d86-bd5f-e7d66047d1d3",
+      "name": "vz",
+      "direction": "input",
+      "index": 3,
+      "color": "#969696"
+     }
+    ],
+    "outputs": [
+     {
+      "id": "b9a528e0-bb5e-4d86-bd5f-e7d66047d1d3-output-0",
+      "nodeId": "b9a528e0-bb5e-4d86-bd5f-e7d66047d1d3",
+      "name": "fx",
+      "direction": "output",
+      "index": 0,
+      "color": "#969696"
+     },
+     {
+      "id": "b9a528e0-bb5e-4d86-bd5f-e7d66047d1d3-output-1",
+      "nodeId": "b9a528e0-bb5e-4d86-bd5f-e7d66047d1d3",
+      "name": "fz",
+      "direction": "output",
+      "index": 1,
+      "color": "#969696"
+     },
+     {
+      "id": "b9a528e0-bb5e-4d86-bd5f-e7d66047d1d3-output-2",
+      "nodeId": "b9a528e0-bb5e-4d86-bd5f-e7d66047d1d3",
+      "name": "theta_ref",
+      "direction": "output",
+      "index": 2,
+      "color": "#969696"
+     }
+    ],
+    "params": {
+     "func": "planner",
+     "T": "1.0",
+     "_rotation": 0
+    }
+   },
+   {
+    "id": "4777945c-120d-4a49-8405-5ec7e2ac2be1",
+    "type": "ODE",
+    "name": "Rocket",
+    "position": {
+     "x": 640,
+     "y": 260
+    },
+    "inputs": [
+     {
+      "id": "4777945c-120d-4a49-8405-5ec7e2ac2be1-input-0",
+      "nodeId": "4777945c-120d-4a49-8405-5ec7e2ac2be1",
+      "name": "fx",
+      "direction": "input",
+      "index": 0,
+      "color": "#969696"
+     },
+     {
+      "id": "4777945c-120d-4a49-8405-5ec7e2ac2be1-input-1",
+      "nodeId": "4777945c-120d-4a49-8405-5ec7e2ac2be1",
+      "name": "fz",
+      "direction": "input",
+      "index": 1,
+      "color": "#969696"
+     },
+     {
+      "id": "4777945c-120d-4a49-8405-5ec7e2ac2be1-input-2",
+      "nodeId": "4777945c-120d-4a49-8405-5ec7e2ac2be1",
+      "name": "dx",
+      "direction": "input",
+      "index": 2,
+      "color": "#969696"
+     },
+     {
+      "id": "4777945c-120d-4a49-8405-5ec7e2ac2be1-input-3",
+      "nodeId": "4777945c-120d-4a49-8405-5ec7e2ac2be1",
+      "name": "dz",
+      "direction": "input",
+      "index": 3,
+      "color": "#969696"
+     }
+    ],
+    "outputs": [
+     {
+      "id": "4777945c-120d-4a49-8405-5ec7e2ac2be1-output-0",
+      "nodeId": "4777945c-120d-4a49-8405-5ec7e2ac2be1",
+      "name": "x",
+      "direction": "output",
+      "index": 0,
+      "color": "#969696"
+     },
+     {
+      "id": "4777945c-120d-4a49-8405-5ec7e2ac2be1-output-1",
+      "nodeId": "4777945c-120d-4a49-8405-5ec7e2ac2be1",
+      "name": "z",
+      "direction": "output",
+      "index": 1,
+      "color": "#969696"
+     },
+     {
+      "id": "4777945c-120d-4a49-8405-5ec7e2ac2be1-output-2",
+      "nodeId": "4777945c-120d-4a49-8405-5ec7e2ac2be1",
+      "name": "vx",
+      "direction": "output",
+      "index": 2,
+      "color": "#969696"
+     },
+     {
+      "id": "4777945c-120d-4a49-8405-5ec7e2ac2be1-output-3",
+      "nodeId": "4777945c-120d-4a49-8405-5ec7e2ac2be1",
+      "name": "vz",
+      "direction": "output",
+      "index": 3,
+      "color": "#969696"
+     }
+    ],
+    "params": {
+     "func": "point_mass_rhs",
+     "initial_value": "s0",
+     "_rotation": 0
+    }
+   },
+   {
+    "id": "15245778-8e7e-48e1-bff4-b2030eff8eea",
+    "type": "Source",
+    "name": "Gust x",
+    "position": {
+     "x": 420,
+     "y": 400
+    },
+    "inputs": [],
+    "outputs": [
+     {
+      "id": "15245778-8e7e-48e1-bff4-b2030eff8eea-output-0",
+      "nodeId": "15245778-8e7e-48e1-bff4-b2030eff8eea",
+      "name": "out",
+      "direction": "output",
+      "index": 0,
+      "color": "#969696"
+     }
+    ],
+    "params": {
+     "func": "gust_x",
+     "_rotation": 0
+    }
+   },
+   {
+    "id": "def66786-81d0-4ab5-83d0-6bdb59940017",
+    "type": "Source",
+    "name": "Gust z",
+    "position": {
+     "x": 420,
+     "y": 480
+    },
+    "inputs": [],
+    "outputs": [
+     {
+      "id": "def66786-81d0-4ab5-83d0-6bdb59940017-output-0",
+      "nodeId": "def66786-81d0-4ab5-83d0-6bdb59940017",
+      "name": "out",
+      "direction": "output",
+      "index": 0,
+      "color": "#969696"
+     }
+    ],
+    "params": {
+     "func": "gust_z",
+     "_rotation": 0
+    }
+   },
+   {
+    "id": "3ef05576-cdf1-44f0-ba77-92bbc07bd61e",
+    "type": "Function",
+    "name": "|thrust|",
+    "position": {
+     "x": 640,
+     "y": 80
+    },
+    "inputs": [
+     {
+      "id": "3ef05576-cdf1-44f0-ba77-92bbc07bd61e-input-0",
+      "nodeId": "3ef05576-cdf1-44f0-ba77-92bbc07bd61e",
+      "name": "fx",
+      "direction": "input",
+      "index": 0,
+      "color": "#969696"
+     },
+     {
+      "id": "3ef05576-cdf1-44f0-ba77-92bbc07bd61e-input-1",
+      "nodeId": "3ef05576-cdf1-44f0-ba77-92bbc07bd61e",
+      "name": "fz",
+      "direction": "input",
+      "index": 1,
+      "color": "#969696"
+     }
+    ],
+    "outputs": [
+     {
+      "id": "3ef05576-cdf1-44f0-ba77-92bbc07bd61e-output-0",
+      "nodeId": "3ef05576-cdf1-44f0-ba77-92bbc07bd61e",
+      "name": "|f|",
+      "direction": "output",
+      "index": 0,
+      "color": "#969696"
+     }
+    ],
+    "params": {
+     "func": "lambda fx, fz: np.hypot(fx, fz)",
+     "_rotation": 0
+    }
+   },
+   {
+    "id": "2aa6089b-8d21-4636-b8c5-57e07a5f09e4",
+    "type": "Integrator",
+    "name": "Fuel",
+    "position": {
+     "x": 880,
+     "y": 80
+    },
+    "inputs": [
+     {
+      "id": "2aa6089b-8d21-4636-b8c5-57e07a5f09e4-input-0",
+      "nodeId": "2aa6089b-8d21-4636-b8c5-57e07a5f09e4",
+      "name": "in",
+      "direction": "input",
+      "index": 0,
+      "color": "#969696"
+     }
+    ],
+    "outputs": [
+     {
+      "id": "2aa6089b-8d21-4636-b8c5-57e07a5f09e4-output-0",
+      "nodeId": "2aa6089b-8d21-4636-b8c5-57e07a5f09e4",
+      "name": "out",
+      "direction": "output",
+      "index": 0,
+      "color": "#969696"
+     }
+    ],
+    "params": {
+     "initial_value": "0.0",
+     "_rotation": 0
+    }
+   },
+   {
+    "id": "804e8f08-197e-4d36-ad7f-8f0d1bff1bda",
+    "type": "Scope",
+    "name": "Position",
+    "position": {
+     "x": 960,
+     "y": 230
+    },
+    "inputs": [
+     {
+      "id": "804e8f08-197e-4d36-ad7f-8f0d1bff1bda-input-0",
+      "nodeId": "804e8f08-197e-4d36-ad7f-8f0d1bff1bda",
+      "name": "x",
+      "direction": "input",
+      "index": 0,
+      "color": "#969696"
+     },
+     {
+      "id": "804e8f08-197e-4d36-ad7f-8f0d1bff1bda-input-1",
+      "nodeId": "804e8f08-197e-4d36-ad7f-8f0d1bff1bda",
+      "name": "z",
+      "direction": "input",
+      "index": 1,
+      "color": "#969696"
+     }
+    ],
+    "outputs": [],
+    "params": {
+     "labels": "[\"x [m]\", \"z [m]\"]",
+     "_rotation": 0
+    }
+   },
+   {
+    "id": "884c4a8f-ea55-4b0c-83f2-b2665dc2afb1",
+    "type": "Scope",
+    "name": "Velocity",
+    "position": {
+     "x": 960,
+     "y": 360
+    },
+    "inputs": [
+     {
+      "id": "884c4a8f-ea55-4b0c-83f2-b2665dc2afb1-input-0",
+      "nodeId": "884c4a8f-ea55-4b0c-83f2-b2665dc2afb1",
+      "name": "vx",
+      "direction": "input",
+      "index": 0,
+      "color": "#969696"
+     },
+     {
+      "id": "884c4a8f-ea55-4b0c-83f2-b2665dc2afb1-input-1",
+      "nodeId": "884c4a8f-ea55-4b0c-83f2-b2665dc2afb1",
+      "name": "vz",
+      "direction": "input",
+      "index": 1,
+      "color": "#969696"
+     }
+    ],
+    "outputs": [],
+    "params": {
+     "labels": "[\"vx [m/s]\", \"vz [m/s]\"]",
+     "_rotation": 0
+    }
+   },
+   {
+    "id": "b4b3e199-f985-49bf-8b50-898137b1b3b7",
+    "type": "Scope",
+    "name": "Thrust",
+    "position": {
+     "x": 640,
+     "y": -60
+    },
+    "inputs": [
+     {
+      "id": "b4b3e199-f985-49bf-8b50-898137b1b3b7-input-0",
+      "nodeId": "b4b3e199-f985-49bf-8b50-898137b1b3b7",
+      "name": "fx",
+      "direction": "input",
+      "index": 0,
+      "color": "#969696"
+     },
+     {
+      "id": "b4b3e199-f985-49bf-8b50-898137b1b3b7-input-1",
+      "nodeId": "b4b3e199-f985-49bf-8b50-898137b1b3b7",
+      "name": "fz",
+      "direction": "input",
+      "index": 1,
+      "color": "#969696"
+     }
+    ],
+    "outputs": [],
+    "params": {
+     "labels": "[\"fx [N]\", \"fz [N]\"]",
+     "_rotation": 0
+    }
+   },
+   {
+    "id": "42f85d6b-f0d8-4aad-8e72-2c64a654af42",
+    "type": "Scope",
+    "name": "Fuel used",
+    "position": {
+     "x": 1100,
+     "y": 80
+    },
+    "inputs": [
+     {
+      "id": "42f85d6b-f0d8-4aad-8e72-2c64a654af42-input-0",
+      "nodeId": "42f85d6b-f0d8-4aad-8e72-2c64a654af42",
+      "name": "fuel",
+      "direction": "input",
+      "index": 0,
+      "color": "#969696"
+     }
+    ],
+    "outputs": [],
+    "params": {
+     "labels": "[\"fuel [N s]\"]",
+     "_rotation": 0
+    }
+   }
+  ],
+  "connections": [
+   {
+    "id": "95c6ca65-e82a-4527-894a-f2fec8c3c684",
+    "sourceNodeId": "b9a528e0-bb5e-4d86-bd5f-e7d66047d1d3",
+    "sourcePortIndex": 0,
+    "targetNodeId": "4777945c-120d-4a49-8405-5ec7e2ac2be1",
+    "targetPortIndex": 0
+   },
+   {
+    "id": "ce24486a-2c01-465e-bc22-579f04ca08b2",
+    "sourceNodeId": "b9a528e0-bb5e-4d86-bd5f-e7d66047d1d3",
+    "sourcePortIndex": 1,
+    "targetNodeId": "4777945c-120d-4a49-8405-5ec7e2ac2be1",
+    "targetPortIndex": 1
+   },
+   {
+    "id": "2ac5d613-6eb5-4eb9-af80-3a058fd95947",
+    "sourceNodeId": "15245778-8e7e-48e1-bff4-b2030eff8eea",
+    "sourcePortIndex": 0,
+    "targetNodeId": "4777945c-120d-4a49-8405-5ec7e2ac2be1",
+    "targetPortIndex": 2
+   },
+   {
+    "id": "22f03291-2dbc-4a0c-aa5e-27f41d155f07",
+    "sourceNodeId": "def66786-81d0-4ab5-83d0-6bdb59940017",
+    "sourcePortIndex": 0,
+    "targetNodeId": "4777945c-120d-4a49-8405-5ec7e2ac2be1",
+    "targetPortIndex": 3
+   },
+   {
+    "id": "fb3162ad-45c4-40a6-957e-353c0c72c930",
+    "sourceNodeId": "4777945c-120d-4a49-8405-5ec7e2ac2be1",
+    "sourcePortIndex": 0,
+    "targetNodeId": "b9a528e0-bb5e-4d86-bd5f-e7d66047d1d3",
+    "targetPortIndex": 0
+   },
+   {
+    "id": "ecdc356d-fb9a-46c8-872a-8a811580359a",
+    "sourceNodeId": "4777945c-120d-4a49-8405-5ec7e2ac2be1",
+    "sourcePortIndex": 1,
+    "targetNodeId": "b9a528e0-bb5e-4d86-bd5f-e7d66047d1d3",
+    "targetPortIndex": 1
+   },
+   {
+    "id": "cbe0bb03-f193-47d8-8ff8-60da9ecb6bba",
+    "sourceNodeId": "4777945c-120d-4a49-8405-5ec7e2ac2be1",
+    "sourcePortIndex": 2,
+    "targetNodeId": "b9a528e0-bb5e-4d86-bd5f-e7d66047d1d3",
+    "targetPortIndex": 2
+   },
+   {
+    "id": "7cc0e3e1-5009-49b7-97e2-31ab44148dc8",
+    "sourceNodeId": "4777945c-120d-4a49-8405-5ec7e2ac2be1",
+    "sourcePortIndex": 3,
+    "targetNodeId": "b9a528e0-bb5e-4d86-bd5f-e7d66047d1d3",
+    "targetPortIndex": 3
+   },
+   {
+    "id": "e4140854-787e-4c70-82b9-0d67ca96e548",
+    "sourceNodeId": "4777945c-120d-4a49-8405-5ec7e2ac2be1",
+    "sourcePortIndex": 0,
+    "targetNodeId": "804e8f08-197e-4d36-ad7f-8f0d1bff1bda",
+    "targetPortIndex": 0
+   },
+   {
+    "id": "86f9ca74-e25c-4485-88e6-746d34416ee2",
+    "sourceNodeId": "4777945c-120d-4a49-8405-5ec7e2ac2be1",
+    "sourcePortIndex": 1,
+    "targetNodeId": "804e8f08-197e-4d36-ad7f-8f0d1bff1bda",
+    "targetPortIndex": 1
+   },
+   {
+    "id": "2da06d5f-1571-430e-8dce-8d207756e11b",
+    "sourceNodeId": "4777945c-120d-4a49-8405-5ec7e2ac2be1",
+    "sourcePortIndex": 2,
+    "targetNodeId": "884c4a8f-ea55-4b0c-83f2-b2665dc2afb1",
+    "targetPortIndex": 0
+   },
+   {
+    "id": "435235e1-1b25-4796-954f-a797052e4c18",
+    "sourceNodeId": "4777945c-120d-4a49-8405-5ec7e2ac2be1",
+    "sourcePortIndex": 3,
+    "targetNodeId": "884c4a8f-ea55-4b0c-83f2-b2665dc2afb1",
+    "targetPortIndex": 1
+   },
+   {
+    "id": "7eabba25-3d91-478f-8969-b59459f43d99",
+    "sourceNodeId": "b9a528e0-bb5e-4d86-bd5f-e7d66047d1d3",
+    "sourcePortIndex": 0,
+    "targetNodeId": "3ef05576-cdf1-44f0-ba77-92bbc07bd61e",
+    "targetPortIndex": 0
+   },
+   {
+    "id": "f40f7a11-4135-4ac1-b693-9ae689f89113",
+    "sourceNodeId": "b9a528e0-bb5e-4d86-bd5f-e7d66047d1d3",
+    "sourcePortIndex": 1,
+    "targetNodeId": "3ef05576-cdf1-44f0-ba77-92bbc07bd61e",
+    "targetPortIndex": 1
+   },
+   {
+    "id": "2055bf9b-c47e-4ca8-8475-e714857762c7",
+    "sourceNodeId": "b9a528e0-bb5e-4d86-bd5f-e7d66047d1d3",
+    "sourcePortIndex": 0,
+    "targetNodeId": "b4b3e199-f985-49bf-8b50-898137b1b3b7",
+    "targetPortIndex": 0
+   },
+   {
+    "id": "35e8a060-ac25-4491-9af1-6d6f1383a0d5",
+    "sourceNodeId": "b9a528e0-bb5e-4d86-bd5f-e7d66047d1d3",
+    "sourcePortIndex": 1,
+    "targetNodeId": "b4b3e199-f985-49bf-8b50-898137b1b3b7",
+    "targetPortIndex": 1
+   },
+   {
+    "id": "0ff53ba2-1040-4038-83fa-f0c691dc8488",
+    "sourceNodeId": "3ef05576-cdf1-44f0-ba77-92bbc07bd61e",
+    "sourcePortIndex": 0,
+    "targetNodeId": "2aa6089b-8d21-4636-b8c5-57e07a5f09e4",
+    "targetPortIndex": 0
+   },
+   {
+    "id": "f6b2b7ba-9210-4161-9c87-4069ece7cd79",
+    "sourceNodeId": "2aa6089b-8d21-4636-b8c5-57e07a5f09e4",
+    "sourcePortIndex": 0,
+    "targetNodeId": "42f85d6b-f0d8-4aad-8e72-2c64a654af42",
+    "targetPortIndex": 0
+   }
+  ]
+ },
+ "events": [
+  {
+   "id": "5f7ebf9f-0b8c-4b97-b483-7c3d723dcb99",
+   "type": "pathsim.events.ZeroCrossingDown",
+   "name": "Landed",
+   "position": {
+    "x": 1180,
+    "y": 500
+   },
+   "params": {
+    "func_evt": "touchdown",
+    "func_act": "stop_sim"
+   }
+  }
+ ],
+ "codeContext": {
+  "code": "\"\"\"Rocket landing as one convex problem, re-solved every second (MPC).\n\nPlain functions only, so the same code drives the PathSim custom blocks\n(rocket_blocks.py) and the code panel of the PathView models (make_pvm.py\npastes this file in verbatim).\n\nProblem: CVXPY x NASA short course 2024, Lecture 3 (point mass, side view):\n    minimize    sum_k ||f_k||                       (fuel)\n    subject to  v[k+1] = v[k] + (h/m) f[k] - h g e_z\n                p[k+1] = p[k] + (h/2) (v[k] + v[k+1])\n                ||f_k|| <= Fmax                     (thrust ceiling)\n                z_k >= tan(alpha) |x_k|             (glide cone)\n                p_K = 0, v_K = 0                    (touch down at rest on the pad)\n\"\"\"\nimport time\nimport numpy as np\nimport cvxpy as cp\n\n# ---- lecture values (CVXPY x NASA Lecture 3) -----------------------------------\nH, G, M, FMAX, ALPHA, K = 1.0, 0.1, 10.0, 10.0, np.pi / 8, 35\nP0, V0 = (80.0, 100.0), (-12.0, -6.0)          # start: 80 m from the pad, 100 m up, heading toward it\n\n# wind gusts [m/s^2]: new value every 3 s, calm after t = 26 s (x, z)\nGUST_TABLE = [(-0.133715, -0.000130), (-0.133715, -0.000130), (-0.133715, -0.000130), (0.036539, -0.084836), (0.036539, -0.084836), (0.036539, -0.084836), (-0.126747, 0.077078), (-0.126747, 0.077078), (-0.126747, 0.077078), (-0.154649, -0.066641), (-0.154649, -0.066641), (-0.154649, -0.066641), (0.161398, 0.021939), (0.161398, 0.021939), (0.161398, 0.021939), (-0.047162, 0.002050), (-0.047162, 0.002050), (-0.047162, 0.002050), (0.058623, -0.040444), (0.058623, -0.040444), (0.058623, -0.040444), (-0.130331, 0.051847), (-0.130331, 0.051847), (-0.130331, 0.051847), (0.061330, 0.002229), (0.061330, 0.002229), (0.000000, 0.000000), (0.000000, 0.000000), (0.000000, 0.000000), (0.000000, 0.000000), (0.000000, 0.000000), (0.000000, 0.000000), (0.000000, 0.000000), (0.000000, 0.000000), (0.000000, 0.000000)]\n\n# ---- rigid body (illustrative values, not from the lecture) --------------------------\nJ_BODY = 30.0                    # pitch inertia [kg m^2]\nARM = 4.0                        # engine gimbal point below the centre of mass [m]\nDELTA_MAX = np.deg2rad(0.0)      # gimbal limit [rad]: 0 = gimbal off; try 5-10 deg (its side force fights the plan)\nTAU_RCS = 6.0                    # reaction-control torque limit [N m]: turns the body, burning or coasting\nK_ANG, K_RATE = 1.0, 60.0        # attitude loop: angle error -> rate command [1/s], rate error -> torque [N m s/rad]\nOMEGA_MAX = 0.25                 # turn-rate limit [rad/s], so the body can always stop turning in time\nFMAX_PLAN_RIGID = 9.0            # plan at 90 % thrust: keep margin for steering\nTILT_MAX = np.deg2rad(80.0)      # rigid body: thrust within 80 deg of vertical (never push down)\nTILT_LAND = np.deg2rad(15.0)     # ...and within 15 deg for the last 2 s, so it lands upright\nSLEW_RIGID = 3.0                 # thrust vector may change by at most 3 N per second\nMAX_DELAY = 8                    # touchdown may slip up to 8 s past t = 35 s\n\n\n# ---- the convex plan ------------------------------------------------------------------\ndef min_fuel_plan(p0, v0, steps, fmax=FMAX, tilt_max=None, tilt_land=None, slew=None, f_prev=None):\n    \"\"\"Solve the landing SOCP from (p0, v0) over `steps` one-second steps.\n    Returns (P, V, F, fuel, status). If the hard landing is infeasible (possible\n    when a real body drifts off the plan), it lands as close as it can instead.\n    tilt_max / tilt_land add the thrust-pointing cone ||f_k|| <= f_z,k / cos(tilt): convex too.\n    slew limits how much the thrust vector may change per step, ||f_k+1 - f_k|| <= slew,\n    starting from the thrust applied last (f_prev): also convex.\"\"\"\n    P = cp.Variable((steps + 1, 2)); V = cp.Variable((steps + 1, 2)); F = cp.Variable((steps, 2))\n    dyn = [P[0] == np.asarray(p0, float), V[0] == np.asarray(v0, float),\n           V[1:, 0] == V[:-1, 0] + H * F[:, 0] / M,\n           V[1:, 1] == V[:-1, 1] + H * (F[:, 1] / M - G),\n           P[1:] == P[:-1] + H / 2 * (V[:-1] + V[1:]),\n           cp.norm(F, 2, axis=1) <= fmax,\n           P[:, 1] >= np.tan(ALPHA) * cp.abs(P[:, 0])]\n    if tilt_max is not None:\n        dyn += [cp.norm(F, 2, axis=1) <= F[:, 1] / np.cos(tilt_max)]\n    if slew is not None:\n        dyn += [cp.norm(F[1:] - F[:-1], 2, axis=1) <= slew]\n        if f_prev is not None:\n            dyn += [cp.norm(F[0] - np.asarray(f_prev, float)) <= slew]\n    if tilt_land is not None:\n        last = min(2, steps)\n        dyn += [cp.norm(F[-last:], 2, axis=1) <= F[-last:, 1] / np.cos(tilt_land)]\n    fuel = cp.sum(cp.norm(F, 2, axis=1))\n    prob = cp.Problem(cp.Minimize(fuel), dyn + [P[steps] == 0, V[steps] == 0])\n    prob.solve(solver=cp.CLARABEL)\n    if prob.status not in (\"optimal\", \"optimal_inaccurate\"):\n        soft = cp.Problem(cp.Minimize(fuel + 100 * cp.norm(P[steps]) + 100 * cp.norm(V[steps])),\n                          dyn[:6] + dyn[7:])        # keep everything but the glide cone\n        soft.solve(solver=cp.CLARABEL)\n        return P.value, V.value, F.value, float(fuel.value), \"soft\"\n    return P.value, V.value, F.value, float(prob.value), prob.status\n\n\nBURN_MIN = 1.0                   # thrust below 1 N (10 %) counts as \"not burning\" for attitude\n\n\ndef burn_direction(F, threshold=BURN_MIN):\n    \"\"\"Tilt [rad, + = nose toward +x] of the first real burn in a plan (0 = upright).\"\"\"\n    for f in F:\n        if np.hypot(*f) > threshold:\n            return float(np.arctan2(f[0], f[1]))\n    return 0.0\n\n\nclass ConvexLandingPlanner:\n    \"\"\"Called once per second with the measured state (x, z, vx, vz).\n\n    mode=\"mpc\":       re-solve from the measured state with a shrinking horizon,\n                      return only the first thrust (model predictive control)\n    mode=\"open_loop\": solve once at t = 0, then play that thrust schedule blind\n\n    Returns (fx, fz, theta_ref): planned thrust and the direction of the next burn,\n    so a real body can turn toward it during a coast.\n\n    If landing on time is no longer possible, the touchdown time moves later one\n    second at a time, up to `max_delay` (a line search on the landing time).\n    \"\"\"\n\n    def __init__(self, mode=\"mpc\", steps=K, fmax=FMAX, tilt_max=None, tilt_land=None, slew=None, max_delay=0):\n        self.mode, self.steps, self.fmax, self.max_delay = mode, steps, fmax, max_delay\n        self.limits = dict(tilt_max=tilt_max, tilt_land=tilt_land, slew=slew)\n        self.f_prev = None\n        self.k, self.log, self._F = 0, [], None\n\n    def __call__(self, x, z, vx, vz):\n        k = self.k; self.k += 1\n        left = self.steps - k\n        if left <= 0:\n            return np.array([0.0, 0.0, 0.0])\n        t0 = time.perf_counter()\n        if self.mode == \"mpc\" or self._F is None:\n            for extra in range(self.max_delay + 1):\n                P, V, F, fuel, status = min_fuel_plan((x, z), (vx, vz), left + extra, self.fmax,\n                                                      f_prev=self.f_prev, **self.limits)\n                if status != \"soft\":\n                    break\n            self.steps += extra; left += extra              # touchdown moved later by `extra` seconds\n            self._F, self._P = F, P\n            ms = 1e3 * (time.perf_counter() - t0)\n            self.log.append(dict(k=k, state=[x, z, vx, vz], plan=P.tolist(), f0=F[0].tolist(), t_land=self.steps,\n                                 fuel_to_go=fuel, status=status, solve_ms=ms))\n            f, rest = F[0], F\n        else:\n            f, rest = self._F[k], self._F[k:]\n        self.f_prev = np.array(f[:2], float)\n        return np.array([f[0], f[1], burn_direction(rest)])\n\n\ndef gust(t, on=True):\n    \"\"\"Gust acceleration (dx, dz) at time t: piecewise constant, one value per second.\"\"\"\n    k = int(np.floor(t + 1e-9))\n    if not on or k < 0 or k >= len(GUST_TABLE):\n        return 0.0, 0.0\n    return GUST_TABLE[k]\n\n\n# ---- plants ------------------------------------------------------------------------------\ndef point_mass_rhs(s, u, t):\n    \"\"\"s = (x, z, vx, vz), u = (fx, fz, dx, dz).\"\"\"\n    fx, fz, dx, dz = u\n    return np.array([s[2], s[3], fx / M + dx, fz / M - G + dz])\n\n\ndef rigid_body_rhs(s, u, t):\n    \"\"\"Planar rigid body. s = (x, z, theta, vx, vz, omega), u = (T, delta, tau_rcs, dx, dz).\n    Thrust T acts along theta + delta; the gimbal sits ARM below the centre of mass.\"\"\"\n    T, delta, tau, dx, dz = u\n    th = s[2]\n    return np.array([s[3], s[4], s[5],\n                     T / M * np.sin(th + delta) + dx,\n                     T / M * np.cos(th + delta) - G + dz,\n                     (-T * ARM * np.sin(delta) + tau) / J_BODY])\n\n\ndef attitude_control(fx, fz, th_ref, th, om):\n    \"\"\"Inner loop: turn the body toward the planned thrust, then push along the body.\n    Returns (T, delta, tau_rcs).\"\"\"\n    fmag = np.hypot(fx, fz)\n    th_des = np.arctan2(fx, fz) if fmag > BURN_MIN else th_ref\n    T = float(np.clip(fx * np.sin(th) + fz * np.cos(th), 0.0, FMAX))   # only the part along the body helps\n    err = (th_des - th + np.pi) % (2 * np.pi) - np.pi\n    om_cmd = np.clip(K_ANG * err, -OMEGA_MAX, OMEGA_MAX)                 # turn at a capped rate...\n    tau = K_RATE * (om_cmd - om)                                         # ...and track that rate\n    delta = 0.0\n    if T > 0.5:\n        delta = float(np.arcsin(np.clip(-tau / (T * ARM), -np.sin(DELTA_MAX), np.sin(DELTA_MAX))))\n    tau_rcs = float(np.clip(tau + T * ARM * np.sin(delta), -TAU_RCS, TAU_RCS))   # the rest from RCS\n    return T, delta, tau_rcs\n\n\n# ==== MODEL SETUP (edit here) ==============================================================\nMODE = \"mpc\"      # \"mpc\": re-solve every second   |   \"open_loop\": fly the t = 0 plan blind\nGUSTS = True      # wind gust sequence on/off\n\nplanner = ConvexLandingPlanner(mode=MODE)               # the \"Convex MPC\" block calls this every 1 s\ns0 = np.array([P0[0], P0[1], V0[0], V0[1]])             # x, z, vx, vz\n\ndef gust_x(t): return gust(t, GUSTS)[0]\ndef gust_z(t): return gust(t, GUSTS)[1]\n\ndef touchdown(t): return rocket.engine.state[1] + 1e-3  # z of the \"Rocket\" block (+1 mm)\ndef stop_sim(t): sim.stop()\n"
+ },
+ "simulationSettings": {
+  "duration": "35",
+  "dt": "0.01",
+  "solver": "RK4",
+  "adaptive": false,
+  "atol": "1e-6",
+  "rtol": "1e-4",
+  "ftol": "1e-10",
+  "dt_min": null,
+  "dt_max": null,
+  "ghostTraces": 0,
+  "plotResults": true
+ }
+}

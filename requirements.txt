@@ -1,0 +1,7 @@
+numpy>=2.0
+scipy>=1.13
+matplotlib>=3.8
+cvxpy>=1.5
+clarabel>=0.9
+pathsim>=0.32
+pathview>=0.21
